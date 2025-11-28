@@ -1,8 +1,4 @@
-Here is the **Ultimate Master README**. It is comprehensive, professional, and styled with a modern "Cyberpunk/High-Tech" aesthetic.
 
-Copy the code block below completely and paste it into your `README.md`.
-
-````markdown
 <div align="center">
 
 # 🐙 CRACKEN V5 ULTIMATE
