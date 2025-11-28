@@ -1,6 +1,3 @@
-
-<div align="center">
-
 # 🐙 CRACKEN V5 ULTIMATE
 ### Professional Pterodactyl Infrastructure Manager
 
@@ -10,25 +7,30 @@
 [![Engineered By](https://img.shields.io/badge/Engineered%20By-Nayeem%20Dev-7000ff?style=for-the-badge&logo=github)](https://github.com/owneraniex)
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=18,2,30&height=220&section=header&text=CRACKEN%20V5&fontSize=80&fontColor=ff00d4&animation=fadeIn&fontAlignY=35&desc=The%20Ultimate%20Pterodactyl%20Installer&descSize=20&descAlignY=55&descAlign=50" alt="header" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=18,2,30&height=220&section=header&text=CRACKEN%20V5&fontSize=80&fontColor=ff00d4&animation=fadeIn&fontAlign=y" width="100%" />
 </p>
 
-*Deploy, Manage, Repair, and Secure your Game Server Infrastructure in seconds.*
+<p align="center"><b>
+Deploy, Manage, Repair, and Secure your Game Server Infrastructure in seconds.
+</b></p>
 
-[ **QUICK START** ](#-quick-start) • [ **FEATURES** ](#-features) • [ **COMMANDS** ](#-dashboard--commands) • [ **REQUIREMENTS** ](#-system-requirements)
-
-</div>
+<p align="center">
+  <a href="#-quick-start"><b>QUICK START</b></a> • 
+  <a href="#-features"><b>FEATURES</b></a> • 
+  <a href="#-dashboard--commands"><b>COMMANDS</b></a> • 
+  <a href="#-system-requirements"><b>REQUIREMENTS</b></a>
+</p>
 
 ---
 
 ## ⚡ Quick Start
 
-**Cracken V5** replaces hours of manual Linux configuration with a single command. 
+**Cracken V5** replaces hours of manual Linux configuration with a single command.  
 Run this on a fresh VPS (Ubuntu/Debian) as `root`:
 
 ```bash
-bash <(curl -s [https://raw.githubusercontent.com/owneraniex/Cracken-BASH/main/Loader.sh](https://raw.githubusercontent.com/owneraniex/Cracken-BASH/main/Loader.sh))
-````
+bash <(curl -s https://raw.githubusercontent.com/owneraniex/Cracken-BASH/main/Loader.sh)
+```
 
 > **🔒 Security Note:** This command initiates our **Secure Loader**, which verifies your server environment before retrieving the encrypted, binary-compiled installer payload.
 
@@ -53,24 +55,24 @@ Most installers are simple Bash scripts that break easily. **Cracken V5** is a c
 
 The wizard will ask you what you want to build:
 
-### 1\. 🏗️ Full Stack (Recommended)
+### 1. 🏗️ Full Stack (Recommended)
 
 Installs **everything** needed to host a hosting company on one machine.
 
-  * **Includes:** Panel, Wings, MariaDB, Redis, Nginx, PHP 8.1, Docker, Certbot.
+* **Includes:** Panel, Wings, MariaDB, Redis, Nginx, PHP 8.1, Docker, Certbot.
 
-### 2\. 🎮 Wings Only (Remote Node)
+### 2. 🎮 Wings Only (Remote Node)
 
 Lightweight installation for adding more servers to your panel.
 
-  * **Includes:** Docker, Wings Daemon.
-  * **Optimized:** Skips PHP/MySQL to save RAM.
+* **Includes:** Docker, Wings Daemon.
+* **Optimized:** Skips PHP/MySQL to save RAM.
 
-### 3\. 💻 Panel Only (Web Interface)
+### 3. 💻 Panel Only (Web Interface)
 
 Installs only the control panel interface.
 
-  * **Includes:** Nginx, PHP, MariaDB, Redis.
+* **Includes:** Nginx, PHP, MariaDB, Redis.
 
 -----
 
@@ -84,7 +86,7 @@ ny-crackenvps
 
 This opens the **Nayeem Dev Management Console**:
 
-```text
+```
 ╭──────────────────────────────────────────────╮
 │  CRACKEN V5 DASHBOARD                        │
 │  Host: panel.yourdomain.com [FULL STACK]     │
@@ -108,9 +110,9 @@ Ensure your infrastructure meets these specifications for maximum stability.
 
 ### 🐧 Operating System
 
-  * **Ubuntu:** 20.04 LTS (Focal) / 22.04 LTS (Jammy)
-  * **Debian:** 11 (Bullseye) / 12 (Bookworm)
-  * *❌ CentOS/AlmaLinux is NOT supported.*
+* **Ubuntu:** 20.04 LTS (Focal) / 22.04 LTS (Jammy)
+* **Debian:** 11 (Bullseye) / 12 (Bookworm)
+* ❌ CentOS/AlmaLinux is NOT supported.
 
 ### 🖥️ Hardware
 
@@ -125,10 +127,10 @@ Ensure your infrastructure meets these specifications for maximum stability.
 
 The installer configures UFW automatically, but ensure your Cloud Firewall allows:
 
-  * `80` (HTTP)
-  * `443` (HTTPS)
-  * `8080` (Wings Port)
-  * `2022` (SFTP Port)
+* `80` (HTTP)
+* `443` (HTTPS)
+* `8080` (Wings Port)
+* `2022` (SFTP Port)
 
 -----
 
@@ -152,19 +154,16 @@ The installer configures UFW automatically, but ensure your Cloud Firewall allow
 
 **Cracken V5** is a proprietary automation tool engineered by **Nayeem Dev**.
 
-  * **Pterodactyl®** is a registered trademark of the Pterodactyl Software project.
-  * This installer is an unofficial tool and is not affiliated with Pterodactyl.
+* **Pterodactyl®** is a registered trademark of the Pterodactyl Software project.
+* This installer is an unofficial tool and is not affiliated with Pterodactyl.
 
-\<div align="center"\>
+---
+
+<div align="center">
+
 <br>
-
 ### Engineered with 💜 by **Nayeem Dev**
 
-[](https://github.com/owneraniex)
-[](https://discord.gg)
+[GitHub](https://github.com/owneraniex) • [Discord](https://discord.gg)
 
-\</div\>
-
-```
-bash <(curl -s https://raw.githubusercontent.com/owneraniex/Cracken-BASH/main/Loader.sh)
-```
+</div>
