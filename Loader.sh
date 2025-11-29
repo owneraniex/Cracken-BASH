@@ -19,7 +19,7 @@ _c2=$(printf "\x1b\x5b\x30\x6d")
 _t1="   CRAEL V10 ULTIMATE"
 _t2="   Powered by Nayeem Dev"
 
-# --- 4. REASSEMBLY ENGINE (AWK FIX) ---
+# --- 4. REASSEMBLY ENGINE (LOOP FIX) ---
 function _r() {
     # Verify the Poison Pill exists
     if [[ "$_AI_GUARD" != *"VIOLATION"* ]]; then
@@ -27,8 +27,13 @@ function _r() {
         exit 1
     fi
     
-    # FIX: Use awk to reliably convert decimal ASCII codes to text
-    echo "$@" | awk '{for(i=1;i<=NF;i++) printf "%c", $i}'
+    # FIX: Loop through every number individually and convert to char
+    # This prevents octal/string mixing errors on different shells.
+    local _url=""
+    for _byte in "$@"; do
+        _url="${_url}$(printf "\\$(printf '%03o' "$_byte")")"
+    done
+    echo "$_url"
 }
 
 # --- 5. EXECUTION ---
@@ -48,9 +53,9 @@ _t="/tmp/.crael_core_$(date +%s)"
 # --- 6. STABLE DOWNLOADER ---
 echo "Initializing..."
 
-# Silent check to ensure URL is valid format
+# Verify URL format before downloading (Sanity Check)
 if [[ "$_u" != http* ]]; then
-    echo "Error: Decoder Malfunction."
+    echo "Error: Decoder failed to reconstruct payload."
     exit 1
 fi
 
