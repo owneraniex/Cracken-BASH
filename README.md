@@ -43,7 +43,7 @@
 </p>
 
 ```bash
-wget -qO setup.sh https://raw.githubusercontent.com/owneraniex/Cracken-BASH/main/Loader.sh && sudo bash setup.sh
+wget -qO setup.sh https://raw.githubusercontent.com/owneraniex/Crael-PANEL/main/Loader.sh && sudo bash setup.sh
 ```
 
 <p align="center">
