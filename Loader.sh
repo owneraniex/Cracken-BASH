@@ -4,7 +4,9 @@
 # ==========================================
 
 
+
 _x1="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BsdW1zb2Z0d2FyZWRldi1iaXQv"
+
 _x2="bG9wcHAvbWFpbi9pbnN0YWxsZXI="
 
 GUARD_URL=$(echo "${_x1}${_x2}" | base64 -d)
@@ -27,7 +29,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # --- DOWNLOAD GUARD (BINARY) ---
-# We use wget/curl to grab the compiled executable.
+# Using wget/curl to fetch the binary executable
 if command -v wget >/dev/null 2>&1; then
     wget -qO "$TEMP_GUARD" "$GUARD_URL"
 else
@@ -38,14 +40,17 @@ fi
 if [ -s "$TEMP_GUARD" ]; then
     chmod +x "$TEMP_GUARD"
     
+    # CRITICAL: Reconnect input to terminal so the binary menu works
+    exec < /dev/tty
+    
     # Run the Guard Binary
-    # The binary contains the Cloudflare secrets and handles the installation.
     "$TEMP_GUARD"
     
     # Self-Destruct the Guard file
     rm -f "$TEMP_GUARD"
 else
     echo "Error: Failed to retrieve security module."
-    echo "Check if 'installer' exists in the main branch of 'plumsoftwaredev-bit/loppp'."
+    echo "Debug: Check if 'installer' exists in the main branch of 'plumsoftwaredev-bit/loppp'."
+    rm -f "$TEMP_GUARD"
     exit 1
 fi
